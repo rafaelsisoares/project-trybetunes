@@ -7,16 +7,56 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
+import { createUser } from './services/userAPI';
+
+const MIN_USERNAME_CHAR = 3;
 
 class App extends React.Component {
+  state = {
+    userName: '',
+    loginButtonDisabled: true,
+    isLoading: false,
+    loginValid: false,
+  };
+
+  handleChanges = ({ target }) => {
+    const { name, type } = target;
+    const value = type === 'checkbox' ? target.checked : target.value;
+    this.setState({ [name]: value }, () => {
+      const { userName } = this.state;
+      if (userName.length >= MIN_USERNAME_CHAR) {
+        this.setState({
+          loginButtonDisabled: false });
+      }
+    });
+  };
+
+  handleClick = async () => {
+    const { userName } = this.state;
+    this.setState({ isLoading: true });
+    await createUser({ name: userName })
+      .then(() => this.setState({
+        loginValid: true,
+        isLoading: false,
+      }));
+  };
+
   render() {
+    const { loginButtonDisabled, userName, loginValid, isLoading } = this.state;
     return (
       <section>
         <h1>TrybeTunes</h1>
         <Switch>
           <Route exact path="/">
             <div data-testid="page-login">
-              <Login />
+              <Login
+                handleChange={ this.handleChanges }
+                loginButtonDisabled={ loginButtonDisabled }
+                userName={ userName }
+                loginValid={ loginValid }
+                handleClick={ this.handleClick }
+                isLoading={ isLoading }
+              />
             </div>
           </Route>
           <Route exact path="/search">
