@@ -7,6 +7,7 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
+import Header from './components/Header';
 import { createUser } from './services/userAPI';
 
 const MIN_USERNAME_CHAR = 3;
@@ -61,6 +62,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/search">
             <div data-testid="page-search">
+              <Header />
               <Search />
             </div>
           </Route>
@@ -69,22 +71,26 @@ class App extends React.Component {
             path="/album/:id"
             render={ (props) => (
               <div data-testid="page-album">
+                <Header />
                 <Album { ...props } />
               </div>
             ) }
           />
           <Route path="/favorites">
             <div data-testid="page-favorites">
+              <Header />
               <Favorites />
             </div>
           </Route>
           <Route exact path="/profile">
             <div data-testid="page-profile">
+              <Header />
               <Profile />
             </div>
           </Route>
           <Route exact path="/profile/edit">
             <div data-testid="page-profile-edit">
+              <Header />
               <ProfileEdit />
             </div>
           </Route>
