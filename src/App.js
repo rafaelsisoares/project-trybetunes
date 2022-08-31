@@ -9,6 +9,7 @@ import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import { createUser } from './services/userAPI';
+import searchAlbumsAPI from './services/searchAlbumsAPI';
 
 const MIN_USERNAME_CHAR = 3;
 const MIN_SEARCH_CHAR = 2;
@@ -20,12 +21,14 @@ class App extends React.Component {
     isLoading: false,
     loginValid: false,
     searchArtist: '',
+    inputValue: '',
     searchButtonDisabled: true,
+    albums: [],
   };
 
   checkSearch = () => {
-    const { searchArtist } = this.state;
-    if (searchArtist.length >= MIN_SEARCH_CHAR) {
+    const { inputValue } = this.state;
+    if (inputValue.length >= MIN_SEARCH_CHAR) {
       this.setState({ searchButtonDisabled: false });
     }
   };
@@ -44,7 +47,7 @@ class App extends React.Component {
     });
   };
 
-  handleClick = async () => {
+  handleClickLogin = async () => {
     const { userName } = this.state;
     this.setState({ isLoading: true });
     await createUser({ name: userName }).then(() => this.setState({
@@ -53,13 +56,28 @@ class App extends React.Component {
     }));
   };
 
+  handleClickSearch = () => {
+    const { inputValue } = this.state;
+    this.setState({ isLoading: true, searchArtist: inputValue }, async () => {
+      const data = await searchAlbumsAPI(inputValue);
+      this.setState({
+        isLoading: false,
+        albums: data,
+        inputValue: '',
+      });
+    });
+  };
+
   render() {
     const {
       loginButtonDisabled,
       userName,
       loginValid,
       isLoading,
+      searchArtist,
+      inputValue,
       searchButtonDisabled,
+      albums,
     } = this.state;
     return (
       <section>
@@ -72,7 +90,7 @@ class App extends React.Component {
                 loginButtonDisabled={ loginButtonDisabled }
                 userName={ userName }
                 loginValid={ loginValid }
-                handleClick={ this.handleClick }
+                handleClick={ this.handleClickLogin }
                 isLoading={ isLoading }
               />
             </div>
@@ -81,8 +99,13 @@ class App extends React.Component {
             <div data-testid="page-search">
               <Header />
               <Search
+                searchArtist={ searchArtist }
                 handleChange={ this.handleChanges }
                 buttonDisabled={ searchButtonDisabled }
+                handleClick={ this.handleClickSearch }
+                isLoading={ isLoading }
+                albums={ albums }
+                inputValue={ inputValue }
               />
             </div>
           </Route>
