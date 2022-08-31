@@ -11,6 +11,7 @@ import Header from './components/Header';
 import { createUser } from './services/userAPI';
 
 const MIN_USERNAME_CHAR = 3;
+const MIN_SEARCH_CHAR = 2;
 
 class App extends React.Component {
   state = {
@@ -18,6 +19,15 @@ class App extends React.Component {
     loginButtonDisabled: true,
     isLoading: false,
     loginValid: false,
+    searchArtist: '',
+    searchButtonDisabled: true,
+  };
+
+  checkSearch = () => {
+    const { searchArtist } = this.state;
+    if (searchArtist.length >= MIN_SEARCH_CHAR) {
+      this.setState({ searchButtonDisabled: false });
+    }
   };
 
   handleChanges = ({ target }) => {
@@ -27,23 +37,30 @@ class App extends React.Component {
       const { userName } = this.state;
       if (userName.length >= MIN_USERNAME_CHAR) {
         this.setState({
-          loginButtonDisabled: false });
+          loginButtonDisabled: false,
+        });
       }
+      this.checkSearch();
     });
   };
 
   handleClick = async () => {
     const { userName } = this.state;
     this.setState({ isLoading: true });
-    await createUser({ name: userName })
-      .then(() => this.setState({
-        loginValid: true,
-        isLoading: false,
-      }));
+    await createUser({ name: userName }).then(() => this.setState({
+      loginValid: true,
+      isLoading: false,
+    }));
   };
 
   render() {
-    const { loginButtonDisabled, userName, loginValid, isLoading } = this.state;
+    const {
+      loginButtonDisabled,
+      userName,
+      loginValid,
+      isLoading,
+      searchButtonDisabled,
+    } = this.state;
     return (
       <section>
         <h1>TrybeTunes</h1>
@@ -63,7 +80,10 @@ class App extends React.Component {
           <Route exact path="/search">
             <div data-testid="page-search">
               <Header />
-              <Search />
+              <Search
+                handleChange={ this.handleChanges }
+                buttonDisabled={ searchButtonDisabled }
+              />
             </div>
           </Route>
           <Route
