@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
+import { addSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class Album extends React.Component {
   state = {
     musics: [],
     isLoading: true,
+    favoriteMusic: false,
   };
 
   componentDidMount() {
@@ -27,8 +29,20 @@ class Album extends React.Component {
     });
   };
 
+  favorite = async ({ target }) => {
+    const { id, checked } = target;
+    const { musics } = this.state;
+    this.setState({ isLoading: true });
+    if (checked) {
+      const favorite = musics.find(({ trackId }, i) => i > 0
+      && Number(trackId) === Number(id));
+      await addSong(favorite)
+        .then(() => this.setState({ isLoading: false, favoriteMusic: checked }));
+    } else this.setState({ isLoading: false });
+  };
+
   render() {
-    const { musics, isLoading } = this.state;
+    const { musics, isLoading, favoriteMusic } = this.state;
     return (
       <section>
         {isLoading ? (
@@ -43,11 +57,19 @@ class Album extends React.Component {
               <h3 data-testid="album-name">{musics[0].collectionName}</h3>
               <p data-testid="artist-name">{musics[0].artistName}</p>
             </div>
-            {musics.map(({ trackName, previewUrl, trackId }, i) => (i > 0 && (
-              <div key={ trackId }>
-                <MusicCard trackName={ trackName } previewUrl={ previewUrl } />
-              </div>
-            )))}
+            {musics.map(
+              ({ trackName, previewUrl, trackId }, i) => i > 0 && (
+                <div key={ trackId }>
+                  <MusicCard
+                    trackName={ trackName }
+                    previewUrl={ previewUrl }
+                    trackId={ trackId }
+                    favorite={ this.favorite }
+                    favoriteMusic={ favoriteMusic }
+                  />
+                </div>
+              ),
+            )}
           </section>
         )}
       </section>
