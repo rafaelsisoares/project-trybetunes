@@ -9,7 +9,6 @@ class Album extends React.Component {
   state = {
     musics: [],
     isLoading: true,
-    favoriteMusic: false,
   };
 
   componentDidMount() {
@@ -30,19 +29,17 @@ class Album extends React.Component {
   };
 
   favorite = async ({ target }) => {
-    const { id, checked } = target;
+    const { id } = target;
     const { musics } = this.state;
     this.setState({ isLoading: true });
-    if (checked) {
-      const favorite = musics.find(({ trackId }, i) => i > 0
-      && Number(trackId) === Number(id));
-      await addSong(favorite)
-        .then(() => this.setState({ isLoading: false, favoriteMusic: checked }));
-    } else this.setState({ isLoading: false });
+    const favorite = musics.find(
+      ({ trackId }, i) => i > 0 && Number(trackId) === Number(id),
+    );
+    await addSong(favorite).then(() => this.setState({ isLoading: false }));
   };
 
   render() {
-    const { musics, isLoading, favoriteMusic } = this.state;
+    const { musics, isLoading } = this.state;
     return (
       <section>
         {isLoading ? (
@@ -65,7 +62,6 @@ class Album extends React.Component {
                     previewUrl={ previewUrl }
                     trackId={ trackId }
                     favorite={ this.favorite }
-                    favoriteMusic={ favoriteMusic }
                   />
                 </div>
               ),
