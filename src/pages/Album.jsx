@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class Album extends React.Component {
@@ -29,13 +29,20 @@ class Album extends React.Component {
   };
 
   favorite = async ({ target }) => {
-    const { id } = target;
+    const { id, checked } = target;
     const { musics } = this.state;
     this.setState({ isLoading: true });
-    const favorite = musics.find(
-      ({ trackId }, i) => i > 0 && Number(trackId) === Number(id),
-    );
-    await addSong(favorite).then(() => this.setState({ isLoading: false }));
+    if (checked) {
+      const favorite = musics.find(
+        ({ trackId }, i) => i > 0 && Number(trackId) === Number(id),
+      );
+      await addSong(favorite).then(() => this.setState({ isLoading: false }));
+    } else {
+      const remove = musics.find(
+        ({ trackId }, i) => i > 0 && Number(trackId) === Number(id),
+      );
+      await removeSong(remove).then(() => this.setState({ isLoading: false }));
+    }
   };
 
   render() {
