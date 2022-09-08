@@ -1,9 +1,10 @@
 .search-container {
-  border: 1px solid black;
+  background-color: rgb(225, 227, 226);
+  box-shadow: 1px 1px 1px 1px grey;
   margin: 20px auto;
   padding: 10px;
   text-align: center;
-  width: 70%;
+  width: 80%;
 }
 
 .search-container input {
@@ -35,7 +36,7 @@
 }
 
 .album-card {
-  border: 1px solid black;
+  border: 5px double black;
   margin: 10px auto;
   width: 20%;
 }

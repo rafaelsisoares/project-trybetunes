@@ -9,15 +9,18 @@
 
 .links {
   display: flex;
-  justify-content: space-between;
+  justify-content: baseline;
 }
 
 .links a {
   background-color: white;
-  border: 1px solid black;
   color: seagreen;
-  padding: 10px 181px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px 190px;
+  text-align: center;
   text-decoration: none;
+  vertical-align: center;
 }
 
 .links a:hover, .links a:focus {
