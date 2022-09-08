@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
+import '../styles/Search.css';
 
 class Search extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class Search extends React.Component {
       inputValue,
     } = this.props;
     return (
-      <section>
+      <section className="search-container">
         <form>
           <input
             type="text"
@@ -38,7 +39,7 @@ class Search extends React.Component {
         {albums.length === 0 ? (
           <p>Nenhum álbum foi encontrado</p>
         ) : (
-          <section>
+          <section className="albums-container">
             <h3>
               Resultado de álbuns de:
               {' '}
@@ -51,7 +52,7 @@ class Search extends React.Component {
                 artworkUrl100,
                 collectionId,
               }) => (
-                <div key={ collectionId }>
+                <div key={ collectionId } className="album-card">
                   <img
                     src={ artworkUrl100 }
                     alt={ `Capa do álbum ${collectionName}` }

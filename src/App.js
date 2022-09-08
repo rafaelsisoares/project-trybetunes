@@ -81,7 +81,6 @@ class App extends React.Component {
     } = this.state;
     return (
       <section>
-        <h1>TrybeTunes</h1>
         <Switch>
           <Route exact path="/">
             <div data-testid="page-login">

@@ -1,0 +1,26 @@
+.div-header {
+  align-items: center;
+  background-color: rgb(18, 65, 38);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.links a {
+  background-color: white;
+  border: 1px solid black;
+  color: seagreen;
+  padding: 10px 181px;
+  text-decoration: none;
+}
+
+.links a:hover, .links a:focus {
+  background-color: seagreen;
+  color: white;
+}

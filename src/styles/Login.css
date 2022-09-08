@@ -1,0 +1,33 @@
+.login-container {
+  background-color: white;
+  box-shadow: 1px 1px 1px 1px grey;
+  height: auto;
+  margin: 200px auto;
+  padding: 15px;
+  text-align: center;
+  width: 40%;
+}
+
+.user-name {
+  padding: 10px;
+  width: 75%;
+}
+
+.btn-login {
+  background-color: seagreen;
+  border: 1px solid currentcolor;
+  border-radius: 10px;
+  color: white;
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 25%;
+}
+
+.btn-login:disabled {
+  background-color: rgb(196, 217, 205);
+}
+
+.btn-login:hover {
+  text-decoration: underline;
+}
