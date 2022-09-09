@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
+import '../styles/MusicCard.css';
 
 class MusicCard extends React.Component {
   state = {
@@ -29,7 +30,7 @@ class MusicCard extends React.Component {
         {isLoading ? (
           <Loading />
         ) : (
-          <div>
+          <div className="music">
             <p>{trackName}</p>
             <audio data-testid="audio-component" src={ previewUrl } controls>
               <track kind="captions" />
@@ -51,6 +52,7 @@ class MusicCard extends React.Component {
             </label>
           </div>
         )}
+        <hr />
       </div>
     );
   }

@@ -4,6 +4,7 @@ import MusicCard from '../components/MusicCard';
 import getMusics from '../services/musicsAPI';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
+import '../styles/Album.css';
 
 class Album extends React.Component {
   state = {
@@ -52,8 +53,8 @@ class Album extends React.Component {
         {isLoading ? (
           <Loading />
         ) : (
-          <section>
-            <div>
+          <section className="album-musics">
+            <div className="album-cover">
               <img
                 src={ musics[0].artworkUrl100 }
                 alt={ `Capa do álbum ${musics[0].collectionName}` }
@@ -61,18 +62,20 @@ class Album extends React.Component {
               <h3 data-testid="album-name">{musics[0].collectionName}</h3>
               <p data-testid="artist-name">{musics[0].artistName}</p>
             </div>
-            {musics.map(
-              ({ trackName, previewUrl, trackId }, i) => i > 0 && (
-                <div key={ trackId }>
-                  <MusicCard
-                    trackName={ trackName }
-                    previewUrl={ previewUrl }
-                    trackId={ trackId }
-                    favorite={ this.favorite }
-                  />
-                </div>
-              ),
-            )}
+            <div className="music-list">
+              {musics.map(
+                ({ trackName, previewUrl, trackId }, i) => i > 0 && (
+                  <div key={ trackId } className="musics">
+                    <MusicCard
+                      trackName={ trackName }
+                      previewUrl={ previewUrl }
+                      trackId={ trackId }
+                      favorite={ this.favorite }
+                    />
+                  </div>
+                ),
+              )}
+            </div>
           </section>
         )}
       </section>

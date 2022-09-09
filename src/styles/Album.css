@@ -1,0 +1,22 @@
+.album-musics {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.album-cover, .music-list {
+  height: 300px;
+  width: 35%;
+}
+
+.album-cover img {
+  width: 50%;
+}
+
+.music-list {
+  background-color: rgb(216, 231, 223);
+  overflow: scroll;
+  padding: 10px;
+}
