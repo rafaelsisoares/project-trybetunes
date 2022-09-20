@@ -1,0 +1,12 @@
+h2 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fav-songs {
+  background-color: rgb(213, 223, 217);
+  box-shadow: 1px 1px 1px 1px gray;
+  margin: 15px auto;
+  padding: 1px 10px;
+  width: 60%;
+}

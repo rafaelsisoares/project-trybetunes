@@ -31,6 +31,7 @@ class MusicCard extends React.Component {
           <Loading />
         ) : (
           <div className="music">
+            <hr />
             <p>{trackName}</p>
             <audio data-testid="audio-component" src={ previewUrl } controls>
               <track kind="captions" />
@@ -52,7 +53,6 @@ class MusicCard extends React.Component {
             </label>
           </div>
         )}
-        <hr />
       </div>
     );
   }
