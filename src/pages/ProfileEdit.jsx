@@ -9,6 +9,7 @@ class ProfileEdit extends React.Component {
     description: '',
     image: '',
     buttonDisabled: true,
+    isValid: false,
   };
 
   componentDidMount() {
@@ -38,13 +39,11 @@ class ProfileEdit extends React.Component {
   handleClick = async () => {
     const { name, email, description, image } = this.state;
     await updateUser({ name, email, description, image });
-    this.goTo();
+    this.setState({ isValid: true });
   };
 
-  goTo = () => (<Redirect to="/profile" />);
-
   render() {
-    const { name, email, description, image, buttonDisabled } = this.state;
+    const { name, email, description, image, buttonDisabled, isValid } = this.state;
     return (
       <section>
         <form>
@@ -104,6 +103,9 @@ class ProfileEdit extends React.Component {
             Salvar
           </button>
         </form>
+        {
+          isValid && (<Redirect to="/profile" />)
+        }
       </section>
     );
   }

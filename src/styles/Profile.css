@@ -1,0 +1,26 @@
+.profile-container {
+  background-color: rgb(213, 223, 217);
+  box-shadow: 1px 1px 1px 1px grey;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 15px auto;
+  padding: 15px;
+  width: 40%;
+}
+
+.profile-container img {
+  border: 5px solid white;
+  border-radius: 100%;
+  width: 20%;
+}
+
+.link-edit {
+  align-self: center;
+  background-color: lightseagreen;
+  border-radius: 7px;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 20%;
+}

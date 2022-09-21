@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
+import '../styles/Profile.css';
 
 class Profile extends React.Component {
   state = {
@@ -31,18 +32,31 @@ class Profile extends React.Component {
     const { isLoading, userName, userDescription, userEmail, userImage } = this.state;
     return (
       <section>
-        {
-          isLoading ? <Loading />
-            : (
-              <div>
-                <img src={ userImage } alt={ userName } data-testid="profile-image" />
-                <p>{userName}</p>
-                <p>{userEmail}</p>
-                <p>{userDescription}</p>
-                <Link to="/profile/edit">Editar perfil</Link>
-              </div>
-            )
-        }
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="profile-container">
+            <img src={ userImage } alt={ userName } data-testid="profile-image" />
+            <p>
+              Nome:
+              {' '}
+              {userName}
+            </p>
+            <p>
+              E-mail:
+              {' '}
+              {userEmail}
+            </p>
+            <p>
+              Descrição:
+              {' '}
+              {userDescription}
+            </p>
+            <Link to="/profile/edit" className="link-edit">
+              Editar perfil
+            </Link>
+          </div>
+        )}
       </section>
     );
   }

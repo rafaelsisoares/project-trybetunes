@@ -8,7 +8,7 @@
 
 .album-cover, .music-list {
   height: 300px;
-  width: 35%;
+  width: 45%;
 }
 
 .album-cover img {
@@ -20,3 +20,4 @@
   overflow: scroll;
   padding: 10px;
 }
+
