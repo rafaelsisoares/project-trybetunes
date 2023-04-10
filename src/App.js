@@ -82,7 +82,7 @@ class App extends React.Component {
     return (
       <section>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/project-trybetunes">
             <div data-testid="page-login">
               <Login
                 handleChange={ this.handleChanges }
