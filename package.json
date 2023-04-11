@@ -2,9 +2,6 @@
   "name": "trybetunes",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "16"
-  },
   "homepage": "https://rafaelsisoares.github.io/project-trybetunes",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
