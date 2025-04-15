@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
@@ -81,6 +82,7 @@ class App extends React.Component {
     } = this.state;
     return (
       <section>
+        <SpeedInsights />
         <Switch>
           <Route exact path="/">
             <div data-testid="page-login">
