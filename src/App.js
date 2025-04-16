@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { SpeedInsights } from '@vercel/speed-insights/dist/react';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
